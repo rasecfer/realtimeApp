@@ -27,4 +27,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    // Definición de las relaciones
+    public function question(){
+        return $this->hasMany(Question::class);
+    }
+
 }
