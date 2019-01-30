@@ -11,3 +11,5 @@ use Illuminate\Http\Request;
  * delete -> destroy
  */
 Route::apiResource('/question', 'QuestionController');
+
+Route::apiResource('/category', 'CategoryController');

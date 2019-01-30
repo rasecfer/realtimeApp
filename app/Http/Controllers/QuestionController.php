@@ -30,7 +30,7 @@ class QuestionController extends Controller
 
         // auth()->user()->question()->create($request->all());
         $question = Question::create($request->all());
-        return $question;
+        return response($question, Response::HTTP_CREATED);
     }
 
     /**
