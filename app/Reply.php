@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
+
+    protected $guarded = [];
     //Definición de la relaciones
     public function question(){
         return $this->belongsTo(Question::class);
