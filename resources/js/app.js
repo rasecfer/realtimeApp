@@ -12,9 +12,13 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import router from './Router/router.js'
-import axios from 'axios'
 
 Vue.use(Vuetify)
+
+import User from './Helpers/User'
+window.User = User
+console.log(User.id())
+console.log(User.name())
 
 /**
  * The following block of code may be used to automatically register your
