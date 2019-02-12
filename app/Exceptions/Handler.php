@@ -59,6 +59,7 @@ class Handler extends ExceptionHandler
             return response(['error' => 'Token has expired!'], Response::HTTP_FORBIDDEN);
         } elseif($exception instanceOf JWTException){
             return response(['error' => 'No Token found!'], Response::HTTP_FORBIDDEN);
+        }
         return parent::render($request, $exception);
     }
 }

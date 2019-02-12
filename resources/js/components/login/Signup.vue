@@ -1,25 +1,33 @@
 <template>
   <v-container>
-    <v-form @submit.prevent="login">
-      <v-alert
-        :value="alert"
-        type="error"
-        outline
-        transition="fade-transition"
-      >
-        Favor de validar los datos de acceso!
-      </v-alert>
-      
+    <v-form @submit.prevent="signup">
+      <v-text-field
+        v-model="form.name"
+        label="Name"
+        type="text"
+        :error-messages="errors.name ? errors.name[0] : ''"
+        required
+      ></v-text-field>
+
       <v-text-field
         v-model="form.email"
         label="E-mail"
         type="email"
+        :error-messages="errors.email ? errors.email[0] : ''"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="form.password"
         label="Password"
+        type="password"
+        :error-messages="errors.password ? errors.password[0] : ''"
+        required
+      ></v-text-field>
+
+      <v-text-field
+        v-model="form.password_confirmation"
+        label="Password Confirmation"
         type="password"
         required
       ></v-text-field>
@@ -29,19 +37,18 @@
         type="submit"
         :loading="loading"
         :disabled="loading"
-      >Login
+      >Sign Up
         <span slot="loader" class="custom-loader">
           <v-icon light>cached</v-icon>
         </span>
       </v-btn>
 
-      <router-link to="/signup">
-        <v-btn color="blue">Sign Up</v-btn>
+      <router-link to="/login">
+        <v-btn color="blue">Login</v-btn>
       </router-link>
 
     </v-form>
   </v-container>
-  
 </template>
 
 <script>
@@ -49,13 +56,19 @@ export default {
   data(){
     return {
       form : {
+        name: null,
         email: null,
-        password: null
+        password: null,
+        password_confirmation: null
       },
+      valid: false,
       loader: false,
       loading: false,
-      alert: false,
-      valid: false
+      errors : {
+        name: '',
+        email: '',
+        password: ''
+      }
     }
   },
   created(){
@@ -64,19 +77,19 @@ export default {
     }
   },
   methods:{
-    login(){
-      this.alert = false
+    signup(){
       this.loader = this.loading = true
-      axios.post('/api/auth/login', this.form)
-      .then(res => {
-        User.responseAfterLogin(res)
-        this.loader = this.loading = false
-      })
-      .catch(error => {
-        // console.log(error.response.data)
-        this.alert = true
-        this.loader = this.loading = false
-      })
+      axios.post('/api/auth/signup', this.form)
+        .then(res => {
+          User.responseAfterLogin(res)
+          this.loader = this.loading = false
+          this.$router.push('forum')
+        })
+        .catch(error => { 
+          this.errors = error.response.data.errors
+          this.loader = this.loading = false
+        })
+        
     }
   }
 }
