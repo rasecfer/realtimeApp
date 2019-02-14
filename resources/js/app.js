@@ -15,6 +15,14 @@ import router from './Router/router.js'
 
 Vue.use(Vuetify)
 
+import VueSimplemde from 'vue-simplemde'
+import 'simplemde/dist/simplemde.min.css'
+
+Vue.use(VueSimplemde)
+
+import md from 'marked'
+window.md = md
+
 import User from './Helpers/User'
 window.User = User
 //console.log(User.id())
