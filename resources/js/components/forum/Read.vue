@@ -1,17 +1,26 @@
 <template>
   <div v-if="question">
     <edit-question :question="question" v-if="editing"></edit-question>
-     <show-question :question="question" v-else></show-question>
+    <show-question :question="question" v-else></show-question>
+    <replies :replies="question.replies" :questionSlug="question.slug"></replies>
+    <create-reply :slug="question.slug"></create-reply>
+    <edit-reply :slug="question.slug"></edit-reply>
   </div>
 </template>
 
 <script>
 import ShowQuestion from './ShowQuestion'
 import EditQuestion from './EditQuestion'
+import Replies from '../reply/Replies'
+import CreateReply from '../reply/Create'
+import EditReply from '../reply/Edit'
 export default {
   components: {
     ShowQuestion,
-    EditQuestion
+    EditQuestion,
+    Replies,
+    CreateReply,
+    EditReply
   },
   data(){
     return {

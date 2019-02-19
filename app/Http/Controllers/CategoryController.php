@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\CategoryResource;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -25,13 +26,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $category = new Category;
         $category->fill($request->all());
         $category->slug = str_slug($request->name);
         $category->save();
-        return response(['category' => new CategoryResource($category)], Response::HTTP_CREATED);
+        return response(new CategoryResource($category), Response::HTTP_CREATED);
     }
 
     /**
@@ -61,7 +62,7 @@ class CategoryController extends Controller
                 'slug' => str_slug($request->name)
             ]
             );
-        return response(['category' => new CategoryResource($category)], Response::HTTP_OK);
+        return response(new CategoryResource($category), Response::HTTP_OK);
     }
 
     /**

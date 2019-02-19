@@ -13,6 +13,8 @@ class Question extends Model
         'title', 'slug', 'body', 'category_id', 'user_id'
     ];
 
+    protected $with = ['replies'];
+
     /**
      * Con esta función se le indica a Laravel cuál es el campo parámetro de búsqueda en la ruta
      * En este caso el campo será slug
@@ -27,7 +29,7 @@ class Question extends Model
     }
 
     public function replies(){
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->latest();
     }
 
     public function category(){
