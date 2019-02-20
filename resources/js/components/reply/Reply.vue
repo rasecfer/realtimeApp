@@ -4,15 +4,17 @@
       <v-card-title>
           <div class="headline">{{reply.user}}</div>
           <div class="ml-2 mt-1 grey--text">dijo {{reply.created_at}}</div>
+          <v-spacer></v-spacer>
+          
           <div v-if="own">
-            <v-spacer></v-spacer>
             <v-btn icon class="primary" @click="edit()">
               <v-icon>edit</v-icon>
             </v-btn>
             <v-btn icon class="error" @click="confirm()">
               <v-icon>delete</v-icon>
             </v-btn>
-          </div>          
+          </div>         
+          <like :reply="reply"></like> 
       </v-card-title>
       <v-divider></v-divider>
       <v-card-text v-html="replyFormated"></v-card-text>
@@ -22,8 +24,12 @@
 </template>
 
 <script>
+import Like from '../like/Like'
 export default {
   props: ['reply', 'index'],
+  components:{
+    Like
+  },
   data(){
     return {
       own: User.own(this.reply.user_id)
