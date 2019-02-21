@@ -21,6 +21,12 @@ Route::post('/like/{reply}', 'LikeController@likeIt');
 
 Route::delete('/like/{reply}', 'LikeController@unLikeIt');
 
+Route::post('notifications', 'NotificationController@index');
+
+Route::post('notifications/markAsRead', 'NotificationController@markOne');
+
+Route::post('notifications/markAllAsRead', 'NotificationController@markAll');
+
 Route::group([
   'middleware' => 'api',
   'prefix' => 'auth'
