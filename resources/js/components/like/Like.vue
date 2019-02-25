@@ -18,6 +18,14 @@ export default {
       return this.liked ? 'teal' : 'grey'
     }
   },
+  created(){
+    Echo.channel('likeChannel')
+      .listen('LikeEvent', (e) => {
+        if(this.reply.id == e.id){
+          e.type == 1 ? this.count ++ : this.count --
+        }
+      });
+  },
   methods: {
     likeIt(){
       if(User.loggedIn()){
