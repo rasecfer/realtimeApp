@@ -57,7 +57,7 @@ export default {
           this.unreadCount = res.data.unread.length
         })
         .catch(error => {
-          console.log(error.response)
+          Exception.handle(error)
         })
     },
     markRead(notification){

@@ -3,8 +3,8 @@
     <edit-question :question="question" v-if="editing"></edit-question>
     <show-question :question="question" v-else></show-question>
     <replies :replies="question.replies" :questionSlug="question.slug"></replies>
-    <create-reply :slug="question.slug"></create-reply>
-    <edit-reply :slug="question.slug"></edit-reply>
+    <create-reply v-if="loggedIn" :slug="question.slug"></create-reply>
+    <edit-reply v-if="loggedIn" :slug="question.slug"></edit-reply>
   </div>
 </template>
 
@@ -31,6 +31,11 @@ export default {
   created(){
     this.listen()
     this.getQuestion()
+  },
+  computed:{
+    loggedIn(){
+      return User.loggedIn()
+    }
   },
   methods:{
     listen(){
