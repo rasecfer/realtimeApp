@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="pa-3">
+  <v-footer class="pa-3" color="grey darken-4" dark>
     FmasSoft
     <v-spacer></v-spacer>
     <div>&copy; {{ new Date().getFullYear() }}</div>

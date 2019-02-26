@@ -26,7 +26,8 @@ export default {
     return {
       read: {},
       unread: {},
-      unreadCount: 0
+      unreadCount: 0,
+      sound: "http://soundbible.com/mp3/glass_ping-Go445-1207030150.mp3"
     }
   },
   computed:{
@@ -43,6 +44,7 @@ export default {
 
       Echo.private('App.User.' + User.id())
         .notification((notification) => {
+          this.playSound()
           this.unread.unshift(notification)
           this.unreadCount++
         })
@@ -70,6 +72,15 @@ export default {
         .catch(error => {
           console.log(error.response)
         })
+    },
+    playSound(){
+      let mp3 = new Audio(this.sound)
+      let alert = mp3.play()
+      if(alert !== null){
+        alert.catch(() => {
+          mp3.play()
+        })
+      }
     }
   }
 }
