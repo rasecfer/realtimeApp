@@ -52,7 +52,7 @@ export default {
   },
   methods:{
     getNotifications(){
-      axios.post('/api/notifications')
+      /*axios.post('/api/notifications')
         .then(res => {
           this.read = res.data.read
           this.unread = res.data.unread
@@ -60,7 +60,19 @@ export default {
         })
         .catch(error => {
           Exception.handle(error)
+        })*/
+        axios({
+          method: 'post',
+          url: '/api/notifications'
         })
+          .then(res => {
+          this.read = res.data.read
+          this.unread = res.data.unread
+          this.unreadCount = res.data.unread.length
+          })
+          .catch(error => {
+            Exception.handle(error)
+          })
     },
     markRead(notification){
       axios.post('/api/notifications/markAsRead', {id: notification.id})

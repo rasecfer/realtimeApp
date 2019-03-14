@@ -1874,7 +1874,19 @@ __webpack_require__.r(__webpack_exports__);
     getNotifications: function getNotifications() {
       var _this2 = this;
 
-      axios.post('/api/notifications').then(function (res) {
+      /*axios.post('/api/notifications')
+        .then(res => {
+          this.read = res.data.read
+          this.unread = res.data.unread
+          this.unreadCount = res.data.unread.length
+        })
+        .catch(error => {
+          Exception.handle(error)
+        })*/
+      axios({
+        method: 'post',
+        url: '/api/notifications'
+      }).then(function (res) {
         _this2.read = res.data.read;
         _this2.unread = res.data.unread;
         _this2.unreadCount = res.data.unread.length;
@@ -109767,7 +109779,7 @@ function () {
       var payload = this.payload(token);
 
       if (payload) {
-        return payload.iss == "https://realtimeapp.test/api/auth/login" || "https://realtimeapp.test/api/auth/signup" ? true : false;
+        return payload.iss == "https://forum.fmassoft.com/api/auth/login" || "https://forum.fmassoft.com/api/auth/signup" ? true : false;
       }
 
       return false;
@@ -109915,7 +109927,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_Parallex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../components/Parallex */ "./resources/js/components/Parallex.vue");
+/* harmony import */ var _components_Parallex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Parallex */ "./resources/js/components/Parallex.vue");
 /* harmony import */ var _components_login_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/login/Login */ "./resources/js/components/login/Login.vue");
 /* harmony import */ var _components_login_Logout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/login/Logout */ "./resources/js/components/login/Logout.vue");
 /* harmony import */ var _components_login_Signup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/login/Signup */ "./resources/js/components/login/Signup.vue");
@@ -109937,7 +109949,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 var routes = [{
   path: '/',
-  component: _components_Parallex__WEBPACK_IMPORTED_MODULE_10__["default"]
+  component: _components_Parallex__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/login',
   component: _components_login_Login__WEBPACK_IMPORTED_MODULE_3__["default"]
